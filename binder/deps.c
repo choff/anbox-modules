@@ -9,6 +9,7 @@
 #include <linux/kallsyms.h>
 #include <linux/kprobes.h>
 #include <linux/version.h>
+#include <linux/task_work.h>
 
 #include "deps.h"
 
@@ -140,11 +141,9 @@ int security_binder_transfer_file(struct task_struct *from, struct task_struct *
 	return security_binder_transfer_file_ptr(from, to, file);
 }
 
-static int (*task_work_add_ptr)(struct task_struct *task, struct callback_head *work,
-		  enum task_work_notify_mode notify) = NULL;
+static int (*task_work_add_ptr)(struct task_struct *task, struct callback_head *work, int) = NULL;
 
-int task_work_add(struct task_struct *task, struct callback_head *work,
-		  enum task_work_notify_mode notify)
+int task_work_add(struct task_struct *task, struct callback_head *work, int notify)
 {
 	if (!task_work_add_ptr)
 		task_work_add_ptr = kallsyms_lookup_name_wrapper("task_work_add");
