@@ -9,7 +9,6 @@
 #include <linux/kallsyms.h>
 #include <linux/kprobes.h>
 #include <linux/version.h>
-#include <linux/task_work.h>
 
 #include "deps.h"
 

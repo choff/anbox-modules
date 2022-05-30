@@ -23,7 +23,6 @@
 #include <linux/uaccess.h>
 #include <linux/highmem.h>
 #include <linux/sizes.h>
-#include <linux/mmap_lock.h>
 #include "binder_alloc.h"
 #include "binder_trace.h"
 
