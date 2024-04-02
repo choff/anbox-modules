@@ -100,3 +100,11 @@ modprobe: FATAL: Module binder_linux not found in directory /lib/modules/6.0.2-7
 ls: cannot access '/dev/binder': No such file or directory
 ls: cannot access '/dev/ashmem': No such file or directory
 ```
+
+# Packaging:
+## Debian/Ubuntu:
+```
+sudo apt-get install devscripts dh-dkms -y 
+debuild -i -us -uc -b 
+ls -lrt ../anbox-modules-dkms_*.deb 
+```
