@@ -1,70 +1,55 @@
-anbox-modules (13) bionic; urgency=medium
-
-  * staging: ashmem: Fix SIGBUS crash when traversing mmaped ashmem pages
-  * ashmem: account for older kernel which don't have vma_set_anonymous
-
- -- Simon Fels <morphis@gravedo.de>  Sun, 02 Sep 2018 13:44:17 +0200
-
-anbox-modules (12) bionic; urgency=medium
-
-  * Bump version for new PPA release
-
- -- Simon Fels <morphis@gravedo.de>  Thu, 05 Jul 2018 17:40:54 +0200
-
-anbox-modules (11) bionic; urgency=medium
-
-  * Split kernel modules out of anbox main repository.
-
- -- Shengjing Zhu <i@zhsj.me>  Fri, 08 Jun 2018 23:53:35 +0800
-
-anbox (10) bionic; urgency=medium
-
-  * Bump version
-
- -- Simon Fels <morphis@gravedo.de>  Wed, 23 May 2018 11:05:05 +0200
-
-anbox (8) artful; urgency=medium
-
-  * Drop upstart/systemctl session jobs
-
- -- Simon Fels <morphis@gravedo.de>  Fri, 14 Jul 2017 20:28:49 +0200
-
-anbox (7) artful; urgency=medium
-
-  * Rebuild dkms modules with the kernel asked for and not the current
-    running kernel.
-
- -- Simon Fels <morphis@gravedo.de>  Thu, 15 Jun 2017 18:19:07 +0200
-
-anbox (6) artful; urgency=medium
-
-  * Add anbox-common package which ships any additional files needed for
-    anbox but can't be installed with a snap as of today.
-
- -- Simon Fels <morphis@gravedo.de>  Sat, 29 Apr 2017 12:06:56 +0200
-
-anbox (5) zesty; urgency=medium
-
-  * Rework packaging to also ship things we installed through the snap
-    based installer before.
-
- -- Simon Fels <morphis@gravedo.de>  Thu, 20 Apr 2017 19:58:22 +0200
-
-anbox (4) zesty; urgency=medium
-
-  * Fetch dkms version from debian package in post-install step.
-
- -- Simon Fels <morphis@gravedo.de>  Thu, 23 Feb 2017 19:12:15 +0100
-
-anbox (3) zesty; urgency=medium
-
-  * Use correct package version in our Makefile to avoid failing module
-    builds on the target device.
-
- -- Simon Fels <morphis@gravedo.de>  Tue, 21 Feb 2017 07:36:45 +0100
-
-anbox (1) xenial; urgency=low
-
-  * Initial release.
-
- -- Simon Fels <morphis@gravedo.de>  Mon, 06 Feb 2017 21:43:58 +0100
+ -Puspendu Banerjee<Puspendu.Banerjee@gmail.com>:2024-04-01T20:41:13-05:00 - Added packaging guide and compat fix
+ -Puspendu Banerjee<Puspendu.Banerjee@gmail.com>:2024-04-01T13:38:37-05:00 - removed obsolete name="%k", added binder symlink (#1)
+ -ssfdust<ssfdust@gmail.com>:2024-01-24T12:45:28+08:00 - Fixes for kernel 6.8
+ -ssfdust<ssfdust@gmail.com>:2024-01-06T10:20:56+08:00 - Fix for kernel 6.7+
+ -musover<meoberto@mthree.es>:2023-12-03T18:18:36+01:00 - Added conditional matching for kernels >= 6.3.0
+ -musover<meoberto@mthree.es>:2023-11-23T18:06:01+01:00 - Fix build for 6.6
+ -Zhang Hua<zhanghua.00@qq.com>:2023-11-01T14:49:49+08:00 - Fix build for kernel 6.6
+ -TheSola10<me@thesola.io>:2023-05-05T22:35:17+02:00 - Fixes for kernel 6.3+
+ -@Kumar<krishnakumar.1905059@srec.ac.in>:2023-04-18T11:16:36+05:30 - Update README.md
+ -SonarBeserk<SonarBeserk@gmail.com>:2022-10-30T01:07:38-04:00 - Create UNINSTALL.sh script and update README.md
+ -munix9<44939650+munix9@users.noreply.github.com>:2023-01-30T14:30:02+01:00 - fix for kernel 6.1
+ -Zhang Hua<zhanghua.00@qq.com>:2023-01-29T16:01:27+08:00 - Add TASK_FREEZABLE
+ -Noob Zhang<17194552+zhanghua000@users.noreply.github.com>:2022-12-24T12:50:18+00:00 - Fix build on 6.1 kernel
+ -zhanghua000<zhanghua.00@qq.com>:2022-10-15T15:34:44+08:00 - Fix build on 6.0 kernel
+ -TheSola10<me@thesola.io>:2022-08-09T17:39:31+02:00 - Fixed page fault by matching in-tree binder behavior
+ -TheSola10<me@thesola.io>:2022-08-08T10:32:25+02:00 - Patches for kernel 5.19
+ -Etaash Mathamsetty<45927311+Etaash-mathamsetty@users.noreply.github.com>:2022-05-24T21:52:05-04:00 - patches for 5.18 kernel
+ -Dhiego Cassiano Fogaça Barbosa<modscleo4@outlook.com>:2021-11-23T17:49:24-03:00 - sync with android binder.c
+ -Dhiego Cassiano Fogaça Barbosa<modscleo4@outlook.com>:2021-11-13T13:51:20-03:00 - compilation fix for kernel 5.15.2
+ -Christian Hoff<christian_hoff@gmx.net>:2021-10-29T17:50:10+02:00 - Compile fixes for kernels 5.11, 5.12 & 5.13
+ -Christian Hoff<christian_hoff@gmx.net>:2021-09-26T18:54:51+02:00 - Update binder to the latest version
+ -Christian Hoff<christian_hoff@gmx.net>:2021-03-08T21:23:59+01:00 - Another compile fix for kernel >= 5.8
+ -Christian Hoff<christian_hoff@gmx.net>:2021-03-08T20:44:14+01:00 - Compile fixes for kernel >= 5.8
+ -Christian Hoff<christian_hoff@gmx.net>:2021-03-08T20:19:16+01:00 - Fix compilation of binder and ashmem on kernel 5.7 and later
+ -Simon Fels<morphis@gravedo.de>:2020-06-14T10:15:28+02:00 - Merge pull request #43 from pevik/kernel-v5.4
+ -Simon Fels<morphis@gravedo.de>:2020-06-14T10:15:07+02:00 - Merge pull request #45 from devhammed/feat/add_script_that_automates_install_steps
+ -Hammed Oyedele<itz.harmid@gmail.com>:2020-03-04T10:25:36+01:00 - docs: describe the purpose of the INSTALL.sh
+ -Hammed Oyedele<itz.harmid@gmail.com>:2020-03-04T10:23:32+01:00 - feat: add script that automates install steps
+ -Petr Vorel<petr.vorel@gmail.com>:2020-01-01T20:29:30+01:00 - travis: Add kernel v5.4
+ -Simon Fels<morphis@gravedo.de>:2019-11-14T15:13:46-08:00 - Merge pull request #38 from bentolor/fix/kernel-5.3
+ -Benjamin Schmid<benjamin.schmid@exxcellent.de>:2019-10-29T12:12:20+01:00 - Add KVER=5.2 and KVER=5.3 to travis configuration
+ -Simon Fels<morphis@gravedo.de>:2019-07-13T11:32:21+02:00 - Merge pull request #19 from 86423355844265459587182778/master
+ -Anonymous<>:2019-07-04T19:02:11+09:00 - Update Travis configuration
+ -Anonymous<>:2019-07-04T18:54:57+09:00 - Update Travis configuration
+ -Anonymous<>:2019-07-04T18:44:11+09:00 - Update Travis configuration
+ -Anonymous<>:2019-07-04T18:37:54+09:00 - Update Travis configuration to use GCC 8
+ -Anonymous<>:2019-06-04T15:43:43+09:00 - Add KVER=5.0 and KVER=5.1 to travis configuration
+ -Anonymous<>:2019-05-12T12:45:44+09:00 - Fix compilation on kernels >= 5.1
+ -Simon Fels<morphis@gravedo.de>:2018-09-08T14:57:43+02:00 - Merge pull request #10 from mkhon/linux-3.10
+ -Max Khon<fjoe@samodelkin.net>:2018-09-06T07:30:17-04:00 - Fix build on vzkernel 3.10
+ -Simon Fels<morphis@gravedo.de>:2018-09-02T13:45:47+02:00 - Update changelog for release 12 and 13
+ -Simon Fels<morphis@gravedo.de>:2018-09-02T12:20:21+02:00 - Merge pull request #9 from morphis/fix-sigbus-with-newer-kernels
+ -Simon Fels<morphis@gravedo.de>:2018-09-02T12:10:07+02:00 - ashmem: account for older kernel which don't have vma_set_anonymous
+ -John Stultz<john.stultz@linaro.org>:2018-07-31T10:17:04-07:00 - staging: ashmem: Fix SIGBUS crash when traversing mmaped ashmem pages
+ -Simon Fels<morphis@gravedo.de>:2018-07-13T08:04:06+02:00 - Merge pull request #5 from megies/patch-1
+ -Tobias Megies<megies@users.noreply.github.com>:2018-07-12T15:38:08+02:00 - Update README.md
+ -Simon Fels<morphis@gravedo.de>:2018-06-23T14:21:13+02:00 - Merge pull request #3 from zhsj/add-install-doc
+ -Shengjing Zhu<i@zhsj.me>:2018-06-22T20:56:45+08:00 - add install instruction
+ -Simon Fels<morphis@gravedo.de>:2018-06-12T08:44:22+02:00 - Merge pull request #2 from zhsj/travis
+ -Shengjing Zhu<i@zhsj.me>:2018-06-09T15:35:18+08:00 - add travis to test module build
+ -Simon Fels<morphis@gravedo.de>:2018-06-08T18:25:50+02:00 - Merge pull request #1 from zhsj/master
+ -Shengjing Zhu<i@zhsj.me>:2018-06-08T23:55:30+08:00 - improve debian package
+ -Simon Fels<morphis@gravedo.de>:2018-06-08T17:29:53+02:00 - Add travis CI build status to our README
+ -Simon Fels<morphis@gravedo.de>:2018-06-08T17:24:42+02:00 - scripts: add travis build support
+ -Simon Fels<morphis@gravedo.de>:2018-06-08T17:17:43+02:00 - Import kernel module source from original Anbox repository

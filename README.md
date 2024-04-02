@@ -105,6 +105,7 @@ ls: cannot access '/dev/ashmem': No such file or directory
 ## Debian/Ubuntu:
 ```
 sudo apt-get install devscripts dh-dkms -y 
+git log --pretty=" -%an<%ae>:%aI - %s" > ./debian/changelog
 debuild -i -us -uc -b 
 ls -lrt ../anbox-modules-dkms_*.deb 
 ```
