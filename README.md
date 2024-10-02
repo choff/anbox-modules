@@ -29,32 +29,27 @@ You can either run `./INSTALL.sh` script to automate the installation steps or f
 * Then copy the module sources to `/usr/src/`:
 
   ```
-   sudo cp -rT ashmem /usr/src/anbox-ashmem-1
    sudo cp -rT binder /usr/src/anbox-binder-1
   ```
 
 * Finally use `dkms` to build and install:
 
   ```
-   sudo dkms install anbox-ashmem/1
    sudo dkms install anbox-binder/1
   ```
 
 You can verify by loading these modules and checking the created devices:
 
 ```
- sudo modprobe ashmem_linux
  sudo modprobe binder_linux
- lsmod | grep -e ashmem_linux -e binder_linux
- ls -alh /dev/binder /dev/ashmem
+ lsmod | grep -e binder_linux
+ ls -alh /dev/binder
 ```
 
 You are expected to see output like:
 
 ```
 binder_linux          114688  0
-ashmem_linux           16384  0
-crw-rw-rw- 1 root root  10, 55 Jun 19 16:30 /dev/ashmem
 crw-rw-rw- 1 root root 511,  0 Jun 19 16:30 /dev/binder
 ```
 
@@ -65,14 +60,12 @@ ou can either run `./UNINSTALL.sh` script to automate the installation steps or 
 * First use dkms to remove the modules:
 
   ```
-   sudo dkms remove anbox-ashmem/1
    sudo dkms remove anbox-binder/1
   ```
 
 * Then remove the module sources from /usr/src/:
 
   ```
-   sudo rm -rf /usr/src/anbox-ashmem-1
    sudo rm -rf /usr/src/anbox-binder-1
   ```
 
@@ -86,19 +79,16 @@ ou can either run `./UNINSTALL.sh` script to automate the installation steps or 
 You must then restart your device. You can then verify modules were removed by trying to load the modules and checking the created devices:
 
 ```
- sudo modprobe ashmem_linux
  sudo modprobe binder_linux
- lsmod | grep -e ashmem_linux -e binder_linux
- ls -alh /dev/binder /dev/ashmem
+ lsmod | grep -e binder_linux
+ ls -alh /dev/binder
 ```
 
 You are expected to see output like:
 
 ```
-modprobe: FATAL: Module ashmem_linux not found in directory /lib/modules/6.0.2-76060002-generic
 modprobe: FATAL: Module binder_linux not found in directory /lib/modules/6.0.2-76060002-generic
 ls: cannot access '/dev/binder': No such file or directory
-ls: cannot access '/dev/ashmem': No such file or directory
 ```
 
 # Packaging:
