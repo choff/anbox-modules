@@ -16,7 +16,7 @@ Package: anbox-modules-dkms
 Architecture: all
 Depends:
  ${misc:Depends},
-Description: Android kernel driver (binder, ashmem) in DKMS format.
+Description: Android kernel driver (binder) in DKMS format.
  .
  This package contains a out-of-tree version of the core Android
- kernel functionalities binder and ashmem.
+ kernel functionality binder.
