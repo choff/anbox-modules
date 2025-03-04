@@ -1055,6 +1055,13 @@ err_get_alloc_mutex_failed:
 	return LRU_SKIP;
 }
 
+enum lru_status binder_alloc_free_page_no_lock(struct list_head *item,
+					   struct list_lru_one *lru,
+					   void *cb_arg)
+{
+	return binder_alloc_free_page(item, lru, NULL, cb_arg);
+}
+
 static unsigned long
 binder_shrink_count(struct shrinker *shrink, struct shrink_control *sc)
 {
@@ -1066,9 +1073,13 @@ static unsigned long
 binder_shrink_scan(struct shrinker *shrink, struct shrink_control *sc)
 {
 	unsigned long ret;
-
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 13, 0))
+	ret = list_lru_walk(&binder_alloc_lru, binder_alloc_free_page_no_lock,
+				NULL, sc->nr_to_scan);
+#else
 	ret = list_lru_walk(&binder_alloc_lru, binder_alloc_free_page,
-			    NULL, sc->nr_to_scan);
+				NULL, sc->nr_to_scan);
+#endif
 	return ret;
 }
 

@@ -3128,7 +3128,9 @@ static void binder_transaction(struct binder_proc *proc,
 		u32 secid;
 		size_t added_size;
 
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 13, 0)
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 13, 0)
+		security_cred_getsecid(proc->cred, &secid);
+#elif LINUX_VERSION_CODE >= KERNEL_VERSION(5, 13, 0)
 		security_task_getsecid_obj(proc->tsk, &secid);
 #else
 		security_task_getsecid(proc->tsk, &secid);
