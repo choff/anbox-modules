@@ -25,11 +25,6 @@ make scripts CC=${CC} HOSTCC=${CC}
 )
 
 (
-cd ashmem || exit 1
-make KERNEL_SRC="../${src_dir}" CC=${CC} HOSTCC=${CC}
-)
-
-(
 cd binder || exit 1
 make KERNEL_SRC="../${src_dir}" CC=${CC} HOSTCC=${CC}
 )
