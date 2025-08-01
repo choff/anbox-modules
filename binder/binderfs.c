@@ -186,7 +186,11 @@ static int binderfs_binder_device_create(struct inode *ref_inode,
 	inode_lock(d_inode(root));
 
 	/* look it up */
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6,16,0))
+	dentry = lookup_noperm(&QSTR(name), root);
+#else
 	dentry = lookup_one_len(name, root, name_len);
+#endif
 	if (IS_ERR(dentry)) {
 		inode_unlock(d_inode(root));
 		ret = PTR_ERR(dentry);
@@ -523,7 +527,11 @@ static struct dentry *binderfs_create_dentry(struct dentry *parent,
 {
 	struct dentry *dentry;
 
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6,16,0))
+	dentry = lookup_noperm(&QSTR(name), parent);
+#else
 	dentry = lookup_one_len(name, parent, strlen(name));
+#endif
 	if (IS_ERR(dentry))
 		return dentry;
 
