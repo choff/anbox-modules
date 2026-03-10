@@ -26,6 +26,7 @@
 #include <linux/version.h>
 #include "binder_alloc.h"
 #include "binder_trace.h"
+#include "compat_version.h"
 
 struct list_lru binder_alloc_lru;
 
@@ -1073,7 +1074,8 @@ static unsigned long
 binder_shrink_scan(struct shrinker *shrink, struct shrink_control *sc)
 {
 	unsigned long ret;
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 13, 0))
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 13, 0) || \
+     defined(RHEL_10_1_BACKPORTS))
 	ret = list_lru_walk(&binder_alloc_lru, binder_alloc_free_page_no_lock,
 				NULL, sc->nr_to_scan);
 #else
