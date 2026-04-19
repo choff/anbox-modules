@@ -14,3 +14,11 @@ sudo dkms install anbox-binder/1
 sudo modprobe binder_linux
 lsmod | grep -e binder_linux
 ls -alh /dev/binder
+
+#Add symlinks to devices needed by gbinder
+sudo ln -s /dev/binderfs/anbox-binder /dev/binder
+sudo ln -s /dev/binderfs/anbox-hwbinder /dev/hwbinder
+sudo ln -s /dev/binderfs/anbox-vndbinder /dev/vndbinder
+sudo chmod 777 /dev/binder
+sudo chmod 777 /dev/hwbinder
+sudo chmod 777 /dev/vndbinder

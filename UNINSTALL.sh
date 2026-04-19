@@ -10,6 +10,11 @@ sudo rm -rf /usr/src/anbox-binder-1
 sudo rm -f /etc/modules-load.d/anbox.conf
 sudo rm -f /lib/udev/rules.d/99-anbox.rules
 
+#Remove symlinks
+sudo rm /dev/binder
+sudo rm /dev/hwbinder
+sudo rm /dev/vndbinder
+
 # Verify remove by trying to load the modules and checking the created devices:
 failed_checks=0
 if sudo modprobe binder_linux > /dev/null 2>&1; then
