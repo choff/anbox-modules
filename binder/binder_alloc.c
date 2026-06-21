@@ -27,6 +27,7 @@
 #include "binder_alloc.h"
 #include "binder_trace.h"
 #include "compat_version.h"
+#include "deps.h"
 
 struct list_lru binder_alloc_lru;
 
