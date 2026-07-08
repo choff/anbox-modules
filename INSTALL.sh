@@ -1,6 +1,18 @@
 #!/usr/bin/env bash
 
-# First install the configuration files:
+# Important: The script should check if DKMS is Present, because its important so no one would cry at issues
+CHECK=$(command -v dkms 2>/dev/null)
+if [ -n "$CHECK" ]
+  then 
+  echo "DKMS Present, Istalling Anbox Modules"
+  else
+  echo "DKMS Did not respond, it seems that DKMS is not Present or you are not running in sudo/root mode"
+  echo "To make sure, please install dkms and try running the script again with sudo"
+  exit 1
+fi
+unset CHECK
+
+# Start the Operation! : install the configuration files:
 sudo cp anbox.conf /etc/modules-load.d/
 sudo cp 99-anbox.rules /lib/udev/rules.d/
 
