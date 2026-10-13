@@ -42,6 +42,20 @@ static kallsyms_lookup_name_t get_kallsyms_lookup_name_ptr(void)
 	addr = (kallsyms_lookup_name_t) probe.addr;
 	unregister_kprobe(&probe);
 
+#ifdef CONFIG_X86_KERNEL_IBT
+	/*
+	 * With IBT, kprobes skip the function's ENDBR64, so probe.addr is 4
+	 * bytes past the entry. An indirect call there raises #CP; step back.
+	 */
+	{
+		const u8 endbr64[] = { 0xf3, 0x0f, 0x1e, 0xfa };
+		u8 *p = (u8 *)addr - sizeof(endbr64);
+
+		if (!memcmp(p, endbr64, sizeof(endbr64)))
+			addr = (kallsyms_lookup_name_t)p;
+	}
+#endif
+
 	return addr;
 }
 #endif
