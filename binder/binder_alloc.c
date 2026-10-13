@@ -1048,8 +1048,16 @@ enum lru_status binder_alloc_free_page(struct list_head *item,
 
 	trace_binder_unmap_kernel_end(alloc, index);
 
-	spin_lock(lock);
 	mutex_unlock(&alloc->mutex);
+#if (LINUX_VERSION_CODE < KERNEL_VERSION(6, 13, 0) && \
+     !defined(RHEL_10_1_BACKPORTS))
+	/* Before 6.13, LRU_REMOVED_RETRY means the lock was reacquired. */
+	spin_lock(lock);
+#endif
+	/*
+	 * Since 6.13 the walker relocks itself after LRU_REMOVED_RETRY;
+	 * taking the lock here would make it spin forever (kswapd at 100%).
+	 */
 	return LRU_REMOVED_RETRY;
 
 err_mmap_read_lock_failed:
