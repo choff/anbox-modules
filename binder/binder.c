@@ -6261,7 +6261,6 @@ static int __init binder_init(void)
 	return ret;
 
 err_init_binder_device_failed:
-	binder_alloc_shrinker_exit();
 	hlist_for_each_entry_safe(device, tmp, &binder_devices, hlist) {
 		misc_deregister(&device->miscdev);
 		hlist_del(&device->hlist);
@@ -6272,6 +6271,7 @@ err_init_binder_device_failed:
 
 err_alloc_device_names_failed:
 	debugfs_remove_recursive(binder_debugfs_dir_entry_root);
+	binder_alloc_shrinker_exit();
 
 	return ret;
 }
