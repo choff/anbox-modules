@@ -1003,9 +1003,10 @@ enum lru_status binder_alloc_free_page(struct list_head *item,
 	size_t index;
 	struct vm_area_struct *vma;
 
-	/* Since 6.13 the list_lru callback gets no lock; it lives in lru. */
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6,13,0))
 	if (!lock)
 		lock = &lru->lock;
+#endif
 
 	alloc = page->alloc;
 	if (!mutex_trylock(&alloc->mutex))
